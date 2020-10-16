@@ -15,9 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: windowScene)
     window?.backgroundColor = .systemBackground
-   // let rootViewController = WeatherViewController()
-   // rootViewController.forecastService = ForecastService()
-    window?.rootViewController = WeatherViewController()
+    let rootViewController = WeatherViewController()
+    rootViewController.forecastService = ForecastServiceStub()
+   // window?.rootViewController = WeatherViewController()
     window?.makeKeyAndVisible()
   }
 }

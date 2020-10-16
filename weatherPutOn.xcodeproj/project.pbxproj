@@ -37,6 +37,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		736B82792539990F0027ED79 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				736B8276253998B10027ED79 /* SampleData.swift */,
+				73C62464253986F100821DD6 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		736B827A253999240027ED79 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				73C6245B253986EE00821DD6 /* AppDelegate.swift */,
+				73C6245D253986EE00821DD6 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		73C6244F253986EE00821DD6 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +74,13 @@
 		73C6245A253986EE00821DD6 /* weatherPutOn */ = {
 			isa = PBXGroup;
 			children = (
+				736B827A253999240027ED79 /* Application */,
 				73C624732539876400821DD6 /* Controller */,
 				73C624722539875E00821DD6 /* View */,
 				73C624712539875600821DD6 /* Model */,
-				73C6245B253986EE00821DD6 /* AppDelegate.swift */,
-				736B8276253998B10027ED79 /* SampleData.swift */,
-				73C6245D253986EE00821DD6 /* SceneDelegate.swift */,
-				73C62464253986F100821DD6 /* Assets.xcassets */,
-				73C62466253986F100821DD6 /* LaunchScreen.storyboard */,
+				736B82792539990F0027ED79 /* Resource */,
 				73C62469253986F100821DD6 /* Info.plist */,
+				73C62466253986F100821DD6 /* LaunchScreen.storyboard */,
 			);
 			path = weatherPutOn;
 			sourceTree = "<group>";

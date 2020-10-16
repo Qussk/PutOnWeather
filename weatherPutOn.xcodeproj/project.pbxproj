@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		736B8277253998B10027ED79 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B8276253998B10027ED79 /* SampleData.swift */; };
+		736B827C25399AB90027ED79 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736B827B25399AB90027ED79 /* Weather.swift */; };
 		73C6245C253986EE00821DD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6245B253986EE00821DD6 /* AppDelegate.swift */; };
 		73C6245E253986EE00821DD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6245D253986EE00821DD6 /* SceneDelegate.swift */; };
 		73C62465253986F100821DD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73C62464253986F100821DD6 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		736B8276253998B10027ED79 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		736B827B25399AB90027ED79 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		73C62458253986EE00821DD6 /* weatherPutOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherPutOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73C6245B253986EE00821DD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73C6245D253986EE00821DD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		73C624712539875600821DD6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				736B827B25399AB90027ED79 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				73C6247A2539897600821DD6 /* WeatherViewConteroller.swift in Sources */,
 				73C6245E253986EE00821DD6 /* SceneDelegate.swift in Sources */,
 				736B8277253998B10027ED79 /* SampleData.swift in Sources */,
+				736B827C25399AB90027ED79 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

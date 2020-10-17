@@ -15,7 +15,7 @@ struct SampleData {
   static let currentWeather: Data = """
 {
   "coord": { "lon": 139, "lat": 35 },
-  "weather": [ //*날씨(필요한 데이터)
+  "weather": [
     {
       "id": 800,
       "main": "Clear",
@@ -24,7 +24,7 @@ struct SampleData {
     }
   ],
   "base": "stations",
-  "main": { //*온도
+  "main": {
     "temp": 281.52,
     "feels_like": 278.99,
     "temp_min": 280.15,
@@ -39,7 +39,7 @@ struct SampleData {
   "clouds": {
     "all": 2
   },
-  "dt": 1577804400, //*어느특정시점부터의 초 1970.01.01. 00:00부터 초단위로 계산한 시간
+  "dt": 1577804400,
   "sys": {
     "type": 3,
     "id": 2019346,
@@ -54,8 +54,9 @@ struct SampleData {
   "cod": 200
 }
 """.data(using: .utf8)!
+}
   
-  
+/*
   // MARK: Forecast
 
   static let forecast: Data = """
@@ -147,3 +148,4 @@ struct SampleData {
 """.data(using: .utf8)!
 }
 
+*/

@@ -7,15 +7,14 @@
 
 import Foundation
 
-//에러핸들링 - 에러정의
+//에러정의
 enum ServiceError: Error {
   case invalidURL//URL에러
   case clientError(Error)//클라이언트에러
-  case invalidStatusCode //영향없는코드
-  case noData //데이터없음
-  case decodingError(Error) //디코딩실패
+  case invalidStatusCode//영향없는코드
+  case noData//데이터없음
+  case decodingError(Error)//디코딩실패
 }
-
 
 /*
  clientError - 나에게 에러

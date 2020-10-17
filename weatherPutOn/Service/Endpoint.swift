@@ -8,15 +8,19 @@
 import Foundation
 
 
+//url에 https:오픈웨더맵.org/data/2.5/weather?q=asdfafsd~ 어쩌구..를
+//요청하는 도착지점을 Endpoint로 정의함.
 struct Endpoint {
   let path : Path
 }
 
+//열거형으로 정의
 extension Endpoint {
   enum Path : String {
     case weather
   }
 }
+
 
 /*
 struct Endpoint {

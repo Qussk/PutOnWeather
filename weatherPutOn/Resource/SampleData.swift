@@ -9,9 +9,10 @@ import Foundation
 
 struct SampleData {
   
-//1.개발할때 우선적으로 샘플데이터로 파싱 체크하는 게 좋음.
+//개발할때 우선적으로 샘플데이터로 파싱 체크하는 게 좋음.
 // MARK: CurrentWeather
-  //현재날씨
+ 
+  //방법1. 현재날씨
   static let currentWeather: Data = """
 {
   "coord": { "lon": 139, "lat": 35 },
@@ -54,17 +55,18 @@ struct SampleData {
   "cod": 200
 }
 """.data(using: .utf8)!
-}
   
-/*
-  // MARK: Forecast
 
+
+  // MARK: Forecast
+  
+  //방법2.예보 리스트
   static let forecast: Data = """
 {
   "cod": "200",
   "message": 0,
   "cnt": 2,
-  "list": [
+  "list": [//*이것만 가져오면 됨 list에, dt,main,weather다 있으니까!!(필요한데이터)
     {
       "dt": 1577815200,
       "main": {
@@ -148,4 +150,4 @@ struct SampleData {
 """.data(using: .utf8)!
 }
 
-*/
+

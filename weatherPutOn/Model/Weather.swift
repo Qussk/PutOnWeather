@@ -58,7 +58,5 @@ extension Weather : CustomStringConvertible {
     return "\n" + description
     //예시 [02.02 02시] ☀️ clouds(튼 구름),🌡 22.95º
   }
-  
-  
 }
 

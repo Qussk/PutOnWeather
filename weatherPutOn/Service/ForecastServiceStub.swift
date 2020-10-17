@@ -28,7 +28,7 @@ final class ForecastServiceStub: ForecastServiceable {
 //    }
     do {
       let weather = try JSONDecoder().decode(Weather.self, from: data)
-      completionHandler(.success(weather))
+      completionHandler(.success(weather)) //성공했을 때, weather데이터 들어감.
     } catch {
       completionHandler(.failure(.decodingError(error)))
     }

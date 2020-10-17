@@ -7,6 +7,18 @@
 
 import Foundation
 
+
+struct Endpoint {
+  let path : Path
+}
+
+extension Endpoint {
+  enum Path : String {
+    case weather
+  }
+}
+
+/*
 struct Endpoint {
   //defaultAppID 데이터 단위
   static let defaultAppID = "f70d6c9f2bb7e54606403f82eaddf912"
@@ -46,3 +58,5 @@ extension Endpoint {
   }
   typealias QueryItems = [QueryKey: String]
 }
+*/
+

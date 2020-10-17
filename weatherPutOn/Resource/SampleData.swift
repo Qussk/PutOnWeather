@@ -57,16 +57,15 @@ struct SampleData {
 """.data(using: .utf8)!
   
 
-
   // MARK: Forecast
   
-  //방법2.예보 리스트
+  //방법2. 기상예보 리스트
   static let forecast: Data = """
 {
   "cod": "200",
   "message": 0,
   "cnt": 2,
-  "list": [//*이것만 가져오면 됨 list에, dt,main,weather다 있으니까!!(필요한데이터)
+  "list": [
     {
       "dt": 1577815200,
       "main": {
@@ -149,5 +148,3 @@ struct SampleData {
 }
 """.data(using: .utf8)!
 }
-
-

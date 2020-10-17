@@ -16,11 +16,11 @@ struct Endpoint {
 
 //열거형으로 정의
 extension Endpoint {
-  enum Path : String {
+  enum Path: String {
     case weather
+    case forecast
   }
 }
-
 
 /*
 struct Endpoint {

@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct Forcast {
-  let list : [Weather]
-  //이름이 동일하기 때문에 코딩키할 필요없음
+struct Forecast: Decodable {
+  let list: [Weather]
 }
 
 
+
+//이름이 동일해서 코딩키할 필요 없음

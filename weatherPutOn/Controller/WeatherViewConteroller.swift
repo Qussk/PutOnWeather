@@ -14,12 +14,26 @@ final class WeatherViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    forecastService.fetchWeatherForecast(endpoint: .init(path: .weather)) { result in
+    //현재날씨 : weather에 대한 디코딩테스트
+    forecastService.fetchWeatherForecast(endpoint: .init(path: .weather)) {
+      (result: Result<Weather, ServiceError> )in//result : (type)T에 대한 흰트주기.
       switch result {
       case .success(let value): print(value)
       case .failure(let error): print("현재 날씨 가져오기 실패. \(error)")
       }
     }
+    
+    //예보 : forecast에 대한 디코딩테스트
+    forecastService.fetchWeatherForecast(endpoint: .init(path: .forecast)) {
+      (result: Result<Forecast, ServiceError>) in
+      switch result {
+      case .success(let value): print(value)
+      case .failure(let error): print("기상 예보 가져오기 실패. \(error)")
+      }
+    }
+   
+    //서로다른 타입을 받기위해 쓰는 것 - 제네릭
+    //Forcast타입을 쓰기위해 ForecastServiceable에서 Weather 을 T로 정의
     
   }
 }

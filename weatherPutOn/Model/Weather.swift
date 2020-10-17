@@ -44,3 +44,21 @@ extension Weather: Decodable {
     //date가 아닌 TimeInterval로 꺼내 온 후, dete에 할당.
   }
 }
+
+//내가 원하는 데이터만 보기 쉽게 구성
+//MARK: -CustomStringConvertible
+extension Weather : CustomStringConvertible {
+  var description: String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM.dd HH시"
+    var description = "[ \(formatter.string(from: date)) ]"
+    description += " ☀️ \(sky.first!.main) (\(sky.first!.description)), "
+    //main이랑 description부분만 출력하고 온도만 따로
+    description += " 🌡 \(main.temp)º"
+    return "\n" + description
+    //예시 [02.02 02시] ☀️ clouds(튼 구름),🌡 22.95º
+  }
+  
+  
+}
+

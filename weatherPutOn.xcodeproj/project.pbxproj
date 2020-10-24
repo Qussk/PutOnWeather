@@ -21,7 +21,10 @@
 		73C62468253986F100821DD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C62466253986F100821DD6 /* LaunchScreen.storyboard */; };
 		73C6247A2539897600821DD6 /* WeatherViewConteroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C624792539897600821DD6 /* WeatherViewConteroller.swift */; };
 		73CC247125441E6E00C524B2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC247025441E6E00C524B2 /* WeatherView.swift */; };
-		73CC247625441F4D00C524B2 /* screenBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC247525441F4D00C524B2 /* screenBounds.swift */; };
+		73CC247F2544229500C524B2 /* then.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC247E2544229500C524B2 /* then.swift */; };
+		73CC2482254422D800C524B2 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC2481254422D800C524B2 /* DateFormatter.swift */; };
+		73CC2485254429E100C524B2 /* frames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC2484254429E100C524B2 /* frames.swift */; };
+		73CC248925442A4100C524B2 /* add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC248825442A4100C524B2 /* add.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +44,10 @@
 		73C62469253986F100821DD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73C624792539897600821DD6 /* WeatherViewConteroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewConteroller.swift; sourceTree = "<group>"; };
 		73CC247025441E6E00C524B2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
-		73CC247525441F4D00C524B2 /* screenBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = screenBounds.swift; sourceTree = "<group>"; };
+		73CC247E2544229500C524B2 /* then.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = then.swift; sourceTree = "<group>"; };
+		73CC2481254422D800C524B2 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		73CC2484254429E100C524B2 /* frames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = frames.swift; sourceTree = "<group>"; };
+		73CC248825442A4100C524B2 /* add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = add.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +151,10 @@
 		73CC247425441F2E00C524B2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				73CC247525441F4D00C524B2 /* screenBounds.swift */,
+				73CC247E2544229500C524B2 /* then.swift */,
+				73CC2481254422D800C524B2 /* DateFormatter.swift */,
+				73CC2484254429E100C524B2 /* frames.swift */,
+				73CC248825442A4100C524B2 /* add.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -219,16 +228,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CC2482254422D800C524B2 /* DateFormatter.swift in Sources */,
 				73C6245C253986EE00821DD6 /* AppDelegate.swift in Sources */,
+				73CC248925442A4100C524B2 /* add.swift in Sources */,
 				736B82892539A4550027ED79 /* ForecastService.swift in Sources */,
 				736B82832539A3F80027ED79 /* ForecastServiceable.swift in Sources */,
 				73CC247125441E6E00C524B2 /* WeatherView.swift in Sources */,
 				736B82862539A4260027ED79 /* ForecastServiceStub.swift in Sources */,
 				736B828C2539A4780027ED79 /* Endpoint.swift in Sources */,
-				73CC247625441F4D00C524B2 /* screenBounds.swift in Sources */,
 				73C6247A2539897600821DD6 /* WeatherViewConteroller.swift in Sources */,
 				73C6245E253986EE00821DD6 /* SceneDelegate.swift in Sources */,
+				73CC247F2544229500C524B2 /* then.swift in Sources */,
 				736B8277253998B10027ED79 /* SampleData.swift in Sources */,
+				73CC2485254429E100C524B2 /* frames.swift in Sources */,
 				736B82802539A2430027ED79 /* serviceError.swift in Sources */,
 				736B8294253ADEC30027ED79 /* Forecast.swift in Sources */,
 				736B827C25399AB90027ED79 /* Weather.swift in Sources */,

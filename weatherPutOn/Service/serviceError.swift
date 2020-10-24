@@ -16,12 +16,6 @@ enum ServiceError: Error {
   case decodingError(Error)//디코딩실패
 }
 
-
-
-
-
-
-
 /*
  clientError - 나에게 에러
  invalidStatusCode - 200~300, 300~400까지 허용가능하나, 400,500대는 클라이언트 및 서버에러

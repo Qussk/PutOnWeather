@@ -44,7 +44,6 @@ extension Weather: Decodable {
     //date가 아닌 TimeInterval로 꺼내 온 후, dete에 할당.
   }
 }
-
 //내가 원하는 데이터만 보기 쉽게 구성
 //MARK: -CustomStringConvertible
 extension Weather : CustomStringConvertible {

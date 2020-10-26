@@ -31,7 +31,6 @@ extension Then where Self: AnyObject {
     //타입 : Self -> void를 뱉는 함수타입.
   }
 }
-
  then은 프로토콜임
  extension으로 NSObject을 채택,
  

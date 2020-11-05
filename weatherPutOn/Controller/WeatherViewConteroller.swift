@@ -30,8 +30,9 @@ final class WeatherViewController: UIViewController {
   }
   
   private var forecastList: [Weather]? {
-    didSet { print(forecastList!) }
+    didSet { rootView.tableView.reloadSections([1], with: .none) }
   }
+  
   private let dateFormatter = DateFormatter().then {
     $0.locale = Locale(identifier: "ko")
   }
@@ -51,7 +52,9 @@ final class WeatherViewController: UIViewController {
     rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
  
     rootView.tableView.register(CurrentWeatherCell.self, forCellReuseIdentifier: CurrentWeatherCell.identifier)
+    rootView.tableView.register(ForecastCell.self, forCellReuseIdentifier: ForecastCell.identifier)
     rootView.tableView.dataSource = self
+    rootView.tableView.delegate = self
   }
   
   //스테이터스바 히든시킴
@@ -144,40 +147,64 @@ final class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UITableViewDataSource {
   private enum Section: Int, CaseIterable {
-    case currentWeather
+    case currentWeather, forecast
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    print("Section.allCases:", Section.allCases)
+  //  print("Section.allCases:", Section.allCases)
     return Section.allCases.count
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return currentWeather == nil ? 0 : 1
+    return Section.currentWeather.rawValue == section
+      ? (currentWeather == nil ? 0 : 1)
+      : (forecastList?.count ?? 0)
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(
-      withIdentifier: CurrentWeatherCell.identifier, for: indexPath
-      ) as! CurrentWeatherCell
-    
-    guard let current = currentWeather, let sky = current.sky.first else { return cell }
-    
-    let minTemp = limitFraction(of: current.main.temp_min, maximum: 1)
-    let maxTemp = limitFraction(of: current.main.temp_max, maximum: 1)
-    let temp = limitFraction(of: current.main.temp, maximum: 1)
-    cell.configure(
-      weatherImageName: sky.icon,
-      weatherStatus: sky.description,
-      minTemp: minTemp,
-      maxTemp: maxTemp,
-      currentTemp: temp
-    )
-    return cell
+    if Section.currentWeather.rawValue == indexPath.section {
+      let cell = tableView.dequeueReusableCell(
+        withIdentifier: CurrentWeatherCell.identifier, for: indexPath
+        ) as! CurrentWeatherCell
+      
+      guard let current = currentWeather, let sky = current.sky.first else { return cell }
+      
+      let minTemp = limitFraction(of: current.main.temp_min, maximum: 1)
+      let maxTemp = limitFraction(of: current.main.temp_max, maximum: 1)
+      let temp = limitFraction(of: current.main.temp, maximum: 1)
+      cell.configure(
+        weatherImageName: sky.icon,
+        weatherStatus: sky.description,
+        minTemp: minTemp,
+        maxTemp: maxTemp,
+        currentTemp: temp
+      )
+      return cell
+    } else {
+      let cell = tableView.dequeueReusableCell(
+        withIdentifier: ForecastCell.identifier, for: indexPath
+        ) as! ForecastCell
+      
+      guard let forecast = forecastList?[indexPath.row], let sky = forecast.sky.first else { return cell }
+
+      let day = dateFormatter.string(from: forecast.date, type: .day)
+      let time = dateFormatter.string(from: forecast.date, type: .time)
+      let temp = limitFraction(of: forecast.main.temp, maximum: 0)
+      cell.configure(date: day, time: time, imageName: sky.icon, temperature: temp)
+      return cell
+    }
   }
   
   private func limitFraction(of temperature: Double, maximum: Int) -> String {
-  //temperature 소수점 하나만 나오도록 : Double
     return String(format: "%.\(maximum)f°", temperature)
+  }
+}
+
+
+// MARK: - UITableViewDelegate
+
+extension WeatherViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return (Section.forecast.rawValue == indexPath.section) ? 80 : tableView.rowHeight
   }
 }

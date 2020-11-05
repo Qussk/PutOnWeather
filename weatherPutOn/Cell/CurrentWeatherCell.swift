@@ -88,7 +88,7 @@ final class CurrentWeatherCell: UITableViewCell {
     let kernAttr: [NSAttributedString.Key: Any] = [.kern: -1]
     let fontAttr: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 20, weight: .light)]
     let mergedAttrs = kernAttr.merging(fontAttr) { _, _ in } //merging: 딕셔너리를 합치는 것.kern과font를 합치는 것
-    print("mergedAttrs :", mergedAttrs)
+    //print("mergedAttrs :", mergedAttrs)
     //하나의 레이블에서 서로 다른 폰트 적용
     let mutableString = NSMutableAttributedString(string: "⤓", attributes: mergedAttrs)
     mutableString.append(NSAttributedString(string: minTemp, attributes: kernAttr))

@@ -36,7 +36,7 @@ final class WeatherView: UIView {
   }
   
   let reloadButton = UIButton(type: .system).then {
-    $0.setTitle("+", for: .normal)
+    $0.setTitle("↻", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .preferredFont(forTextStyle: .title1)
     $0.alpha = 0
@@ -46,18 +46,18 @@ final class WeatherView: UIView {
     $0.rowHeight = Layout.currentWeatherCellHeight
     $0.tableFooterView = UIView()
     $0.backgroundColor = .clear
+    $0.separatorColor = .white
     $0.allowsSelection = false
     $0.showsVerticalScrollIndicator = false
-   // $0.contentInset
+    //$0.contentInset
   }
-  
   
   // MARK: Life Cycle
   
   init() {
     super.init(frame: .screenBounds)
-    self.addSubviews(backgroundImageView, topInfoView)
-    topInfoView.addSubviews(locationLabel, timeLabel, reloadButton, tableView)
+    self.addSubviews(backgroundImageView, topInfoView, tableView)
+    topInfoView.addSubviews(locationLabel, timeLabel, reloadButton)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -83,21 +83,21 @@ final class WeatherView: UIView {
       Layout.reloadbuttonSize, Layout.reloadbuttonSize
     )
     reloadButton.center.y = (Layout.topInfoViewHeight / 2) + safeAreaInsets.top
-  
-  tableView.frame = .init(0, topInfoView.maxY, width, height - topInfoView.maxY)
-  let topInset = tableView.height
-    - Layout.currentWeatherCellHeight
-    - (safeAreaInsets.bottom / 2)
-  tableView.contentInset.top = topInset
-  
+    
+    tableView.frame = .init(0, topInfoView.maxY, width, height - topInfoView.maxY)
+    let topInset = tableView.height
+      - Layout.currentWeatherCellHeight
+      - (safeAreaInsets.bottom / 2)
+    tableView.contentInset.top = topInset
   }
 }
+
 
 // MARK: - Manipulate View
 
 extension WeatherView {
-  //트렌지션으로 바뀌기
   func updateBackgroundImage(imageName: String) {
+    //트렌지션으로 바뀌기
     UIView.transition(
       with: backgroundImageView, duration: 1,
       options: [.transitionCrossDissolve],
@@ -113,7 +113,6 @@ extension WeatherView {
     locationLabel.alpha = 0
     timeLabel.alpha = 0
     reloadButton.alpha = 0
-    
     UIView.animate(withDuration: 0.4) {
       self.locationLabel.alpha = 1
       self.timeLabel.alpha = 1

@@ -4,7 +4,8 @@
 //
 //  Created by Qussk_MAC on 2020/10/16.
 //
-/*
+// ForecastService : 실제 API를 받아오는 클래스
+
 import Foundation
 
 final class ForecastService: ForecastServiceable {
@@ -41,4 +42,3 @@ final class ForecastService: ForecastServiceable {
     }.resume()
   }
 }
-*/

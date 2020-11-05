@@ -98,25 +98,36 @@ final class WeatherViewController: UIViewController {
   }
   
   private func fetchCurrentWeather(lat: Double, lon: Double) {
-    forecastService.fetchWeatherForecast(endpoint: .init(path: .weather)) {
-      (result: Result<Weather, ServiceError>) in
+    let endpoint = Endpoint(
+      path: .weather,
+      query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .lang: "kr"]
+    )
+    
+    //[weak self]클로저가 레퍼런스 카운트 올리기를 방지
+    forecastService.fetchWeatherForecast(endpoint: endpoint) {
+      [weak self] (result: Result<Weather, ServiceError>) in
       switch result {
-      case .success(let value): self.currentWeather = value
+      case .success(let value): self?.currentWeather = value //뷰컨이 끝날때까지 self?.currentWeather붙잡고 있기 때문에, weak self로 해제 시켜줌.
       case .failure(let error): print("현재 날씨 가져오기 실패. \(error)")
       }
     }
   }
   
   private func fetchForecast(lat: Double, lon: Double) {
-    forecastService.fetchWeatherForecast(endpoint: .init(path: .forecast)) {
-      (result: Result<Forecast, ServiceError>) in
+    let endpoint = Endpoint(
+      path: .forecast,
+      query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .cnt: "24", .lang: "kr"]
+    )
+    forecastService.fetchWeatherForecast(endpoint: endpoint) {
+      [weak self] (result: Result<Forecast, ServiceError>) in
       switch result {
-      case .success(let value): self.forecastList = value.list
+      case .success(let value): self?.forecastList = value.list
       case .failure(let error): print("기상 예보 가져오기 실패. \(error)")
       }
     }
   }
 }
+
 
 
 /*

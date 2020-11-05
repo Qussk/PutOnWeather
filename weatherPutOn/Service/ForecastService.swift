@@ -10,6 +10,7 @@ import Foundation
 
 final class ForecastService: ForecastServiceable {
   
+  //1-1.dispatchGroup: 무조건 현재날씨가 먼저 온후,기상예보 가져오기.
   private let dispatchGroup = DispatchGroup()
   
   func fetchWeatherForecast<T>(
@@ -18,7 +19,7 @@ final class ForecastService: ForecastServiceable {
   ) where T: Decodable {
     guard let url = endpoint.combineURL() else { return completionHandler(.failure(.invalidURL)) }
     
-    dispatchGroup.enter() // +2
+    dispatchGroup.enter() //1-2. completionHandler를 노티파이 하도록
     URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
       defer { self?.dispatchGroup.leave() }
       guard error == nil else { return completionHandler(.failure(.clientError(error!))) }
@@ -33,9 +34,8 @@ final class ForecastService: ForecastServiceable {
           completionHandler(.success(weather))
         }
       }
-        //main은 항상 async어싱크 //dispatchGroup은 동시에 끝나지 않는 작업을 묶고 있다가, 둘다 끝나야 종료 처리.
-        //순서에 영향을 미치기 때문에 서로 연관이 없도록 짜는 것이 좋음.
-      
+      //main은 항상 async어싱크 //dispatchGroup은 동시에 끝나지 않는 작업을 묶고 있다가, 둘다 끝나야 종료 처리.
+      //순서에 영향을 미치기 때문에 서로 연관이 없도록 짜는 것이 좋음.
       catch {
         completionHandler(.failure(.decodingError(error)))
       }

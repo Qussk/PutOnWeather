@@ -35,7 +35,7 @@ final class WeatherView: UIView {
   }
   
   let reloadButton = UIButton(type: .system).then {
-    $0.setTitle("↻", for: .normal)
+    $0.setTitle("+", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .preferredFont(forTextStyle: .title1)
     $0.alpha = 0
@@ -79,6 +79,16 @@ final class WeatherView: UIView {
 // MARK: - Manipulate View
 
 extension WeatherView {
+  //트렌지션으로 바뀌기
+  func updateBackgroundImage(imageName: String) {
+    UIView.transition(
+      with: backgroundImageView, duration: 1,
+      options: [.transitionCrossDissolve],
+      animations: {
+        self.backgroundImageView.image = UIImage(named: imageName)
+    })
+  }
+  
   func updateTopInfoView(location: String, time: String) {
     locationLabel.text = location
     timeLabel.text = time

@@ -33,10 +33,33 @@ final class WeatherViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    configureViews()
     geocodeAddressString(city: cityName)
   }
+  //누를때마다 이미지 변경
+  func configureViews() {
+    rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
+  }
+  
+  override var prefersStatusBarHidden: Bool { true }
+  
   
   // MARK: Action
+  //updateWeather 리로드버튼 눌렀을 때 작업
+  var count = 0
+  @objc private func updateWeather(_ sender: UIButton) {
+    geocodeAddressString(city: cityName)
+    
+    let imageName = ["sunny", "lightning", "cloudy", "rainy"]
+    count += 1
+    rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
+    
+    let spinAnimation = CABasicAnimation(keyPath: "transform.rotation")
+    spinAnimation.duration = 0.5
+    spinAnimation.toValue = CGFloat.pi * 2
+    sender.layer.add(spinAnimation, forKey: "spinAnimation")
+  }
+  
   
   private func geocodeAddressString(city: String) {
     let geocoder = CLGeocoder()

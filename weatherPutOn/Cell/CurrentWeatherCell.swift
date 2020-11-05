@@ -35,7 +35,7 @@ final class CurrentWeatherCell: UITableViewCell {
   }
   private let currentTempLabel = UILabel().then {
     $0.textColor = .white
-    $0.font = .systemFont(ofSize: 110, weight: .semibold)
+    $0.font = .systemFont(ofSize: 110, weight: .light)
   }
   
   // MARK: Life Cycle
@@ -55,6 +55,7 @@ final class CurrentWeatherCell: UITableViewCell {
   }
   
   private func configureLayout() {
+    //font에 따라 높이가 다르기 때문에 레이블의 높이 다르게
     statusLabel.width = .screenWidth
     statusLabel.height = "1".size(with: statusLabel.font!).height
     statusLabel.x = weatherImageView.maxX + 0
@@ -86,8 +87,9 @@ final class CurrentWeatherCell: UITableViewCell {
     // e.g. ⤓10.2°  ⤒19.4°
     let kernAttr: [NSAttributedString.Key: Any] = [.kern: -1]
     let fontAttr: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 20, weight: .light)]
-    let mergedAttrs = kernAttr.merging(fontAttr) { _, _ in }
-    
+    let mergedAttrs = kernAttr.merging(fontAttr) { _, _ in } //merging: 딕셔너리를 합치는 것.kern과font를 합치는 것
+    print("mergedAttrs :", mergedAttrs)
+    //하나의 레이블에서 서로 다른 폰트 적용
     let mutableString = NSMutableAttributedString(string: "⤓", attributes: mergedAttrs)
     mutableString.append(NSAttributedString(string: minTemp, attributes: kernAttr))
     mutableString.append(NSAttributedString(string: "   "))
@@ -96,7 +98,7 @@ final class CurrentWeatherCell: UITableViewCell {
     tempMinMaxLabel.attributedText = mutableString
     
     currentTempLabel.attributedText = NSAttributedString(
-      string: currentTemp, attributes: [.kern: -10]
+      string: currentTemp, attributes: [.kern: -10] //자간
     )
   }
 }

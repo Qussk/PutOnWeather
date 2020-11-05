@@ -177,6 +177,7 @@ extension WeatherViewController: UITableViewDataSource {
   }
   
   private func limitFraction(of temperature: Double, maximum: Int) -> String {
+  //temperature 소수점 하나만 나오도록 : Double
     return String(format: "%.\(maximum)f°", temperature)
   }
 }

@@ -219,11 +219,15 @@ extension WeatherViewController: UITableViewDelegate {
     return (Section.forecast.rawValue == indexPath.section) ? 80 : tableView.rowHeight
   }
   
-  //스크롤에 따라 블러적용
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     let topInset = scrollView.contentInset.top
     let offset = (topInset + scrollView.contentOffset.y) / topInset
+    //스크롤에 따라 블러적용
     let alpha = 0.8 * min(1, offset)
     rootView.updateBlurView(alpha: alpha)
+    
+    //스크롤에 따라 이펙트 적용
+    let translationX = 30 * min(1, offset) //0~30
+    rootView.applyParallaxEffect(translationX: translationX)
   }
 }

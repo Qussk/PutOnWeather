@@ -110,11 +110,15 @@ extension WeatherView {
         self.backgroundImageView.image = UIImage(named: imageName)
     })
   }
-  
+  //이펙트
+  func applyParallaxEffect(translationX: CGFloat) {
+    backgroundImageView.transform = .init(translationX: translationX, y: 0)
+  }
+  //블러
   func updateBlurView(alpha: CGFloat) {
     blurView.alpha = alpha
   }
-  
+  //탑뷰
   func updateTopInfoView(location: String, time: String) {
     locationLabel.text = location
     timeLabel.text = time

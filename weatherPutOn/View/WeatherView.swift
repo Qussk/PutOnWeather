@@ -23,6 +23,11 @@ final class WeatherView: UIView {
     $0.image = UIImage(named: "sunny")
     $0.contentMode = .scaleAspectFill
   }
+  //블러
+  private let blurView = UIVisualEffectView(frame: .screenBounds).then {
+    $0.effect = UIBlurEffect(style: .dark)
+  }
+  //topInfoView : 테이블뷰 위의 빈 공간
   private let topInfoView = UIView()
   private let locationLabel = UILabel().then {
     $0.textColor = .white
@@ -56,7 +61,7 @@ final class WeatherView: UIView {
   
   init() {
     super.init(frame: .screenBounds)
-    self.addSubviews(backgroundImageView, topInfoView, tableView)
+    self.addSubviews(backgroundImageView, blurView, topInfoView, tableView)//순서주의
     topInfoView.addSubviews(locationLabel, timeLabel, reloadButton)
   }
   
@@ -104,6 +109,10 @@ extension WeatherView {
       animations: {
         self.backgroundImageView.image = UIImage(named: imageName)
     })
+  }
+  
+  func updateBlurView(alpha: CGFloat) {
+    blurView.alpha = alpha
   }
   
   func updateTopInfoView(location: String, time: String) {

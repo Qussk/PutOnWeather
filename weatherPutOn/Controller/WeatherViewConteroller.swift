@@ -218,4 +218,12 @@ extension WeatherViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return (Section.forecast.rawValue == indexPath.section) ? 80 : tableView.rowHeight
   }
+  
+  //스크롤에 따라 블러적용
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let topInset = scrollView.contentInset.top
+    let offset = (topInset + scrollView.contentOffset.y) / topInset
+    let alpha = 0.8 * min(1, offset)
+    rootView.updateBlurView(alpha: alpha)
+  }
 }

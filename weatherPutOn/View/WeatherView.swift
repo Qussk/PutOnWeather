@@ -14,6 +14,7 @@ final class WeatherView: UIView {
     static let topInfoViewHeight: CGFloat = 45
     static let locationLabelHeight: CGFloat = 23
     static let reloadbuttonSize: CGFloat = 40
+    static let currentWeatherCellHeight: CGFloat = 200
   }
   
   // MARK: Subviews
@@ -41,12 +42,22 @@ final class WeatherView: UIView {
     $0.alpha = 0
   }
   
+  let tableView = UITableView().then {
+    $0.rowHeight = Layout.currentWeatherCellHeight
+    $0.tableFooterView = UIView()
+    $0.backgroundColor = .clear
+    $0.allowsSelection = false
+    $0.showsVerticalScrollIndicator = false
+   // $0.contentInset
+  }
+  
+  
   // MARK: Life Cycle
   
   init() {
     super.init(frame: .screenBounds)
     self.addSubviews(backgroundImageView, topInfoView)
-    topInfoView.addSubviews(locationLabel, timeLabel, reloadButton)
+    topInfoView.addSubviews(locationLabel, timeLabel, reloadButton, tableView)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -72,9 +83,15 @@ final class WeatherView: UIView {
       Layout.reloadbuttonSize, Layout.reloadbuttonSize
     )
     reloadButton.center.y = (Layout.topInfoViewHeight / 2) + safeAreaInsets.top
+  
+  tableView.frame = .init(0, topInfoView.maxY, width, height - topInfoView.maxY)
+  let topInset = tableView.height
+    - Layout.currentWeatherCellHeight
+    - (safeAreaInsets.bottom / 2)
+  tableView.contentInset.top = topInset
+  
   }
 }
-
 
 // MARK: - Manipulate View
 

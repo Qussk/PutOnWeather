@@ -16,15 +16,25 @@ final class WeatherViewController: UIViewController {
   let cityName = "서울"
   
   private var currentWeather: Weather? {
-    didSet { print(currentWeather!) }
+    didSet {
+      rootView.tableView.alpha = 0
+      //화면오른쪽으로 가게 만든 다음, 데이타 위치를 원래 위치로 돌아오도록
+      rootView.tableView.transform = CGAffineTransform(translationX: .screenWidth, y: 0)
+      
+      UIView.animate(withDuration: 0.3, animations: {
+        self.rootView.tableView.alpha = 1
+        self.rootView.tableView.transform = .identity
+        self.rootView.tableView.reloadSections([0], with: .none)
+      })
+    }
   }
+  
   private var forecastList: [Weather]? {
     didSet { print(forecastList!) }
   }
   private let dateFormatter = DateFormatter().then {
     $0.locale = Locale(identifier: "ko")
   }
-  
   // MARK: Life Cycle
   
   override func loadView() {
@@ -36,11 +46,15 @@ final class WeatherViewController: UIViewController {
     configureViews()
     geocodeAddressString(city: cityName)
   }
-  //누를때마다 이미지 변경
   func configureViews() {
+    // 버튼 누를 때마다 이미지 변경
     rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
+ 
+    rootView.tableView.register(CurrentWeatherCell.self, forCellReuseIdentifier: CurrentWeatherCell.identifier)
+    rootView.tableView.dataSource = self
   }
   
+  //스테이터스바 히든시킴
   override var prefersStatusBarHidden: Bool { true }
   
   
@@ -126,3 +140,43 @@ final class WeatherViewController: UIViewController {
  //Forcast타입을 쓰기위해 ForecastServiceable에서 Weather 을 T로 정의
  */
 
+// MARK: - UITableViewDataSource
+
+extension WeatherViewController: UITableViewDataSource {
+  private enum Section: Int, CaseIterable {
+    case currentWeather
+  }
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    print("Section.allCases:", Section.allCases)
+    return Section.allCases.count
+  }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return currentWeather == nil ? 0 : 1
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: CurrentWeatherCell.identifier, for: indexPath
+      ) as! CurrentWeatherCell
+    
+    guard let current = currentWeather, let sky = current.sky.first else { return cell }
+    
+    let minTemp = limitFraction(of: current.main.temp_min, maximum: 1)
+    let maxTemp = limitFraction(of: current.main.temp_max, maximum: 1)
+    let temp = limitFraction(of: current.main.temp, maximum: 1)
+    cell.configure(
+      weatherImageName: sky.icon,
+      weatherStatus: sky.description,
+      minTemp: minTemp,
+      maxTemp: maxTemp,
+      currentTemp: temp
+    )
+    return cell
+  }
+  
+  private func limitFraction(of temperature: Double, maximum: Int) -> String {
+    return String(format: "%.\(maximum)f°", temperature)
+  }
+}

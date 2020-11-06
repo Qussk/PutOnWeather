@@ -10,8 +10,12 @@ import UIKit
 
 final class WeatherViewController: UIViewController {
   
-  private let rootView = WeatherView()
+  var crruntPath :Double?
+  var data = Data?.self
   
+  private let rootView = WeatherView()
+  let putMneg : PutOnManager = PutOnManager()
+
   var forecastService: ForecastServiceable!
   let cityName = "서울"
   
@@ -45,8 +49,21 @@ final class WeatherViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureViews()
+    currentWeatherBackgroundImageChange(whit: 0.0)
     geocodeAddressString(city: cityName)
+ 
+    
   }
+  func currentWeatherBackgroundImageChange(whit: Double){
+    
+    rootView.backgroundImageView.image = UIImage(named: "fall01")
+
+   // rootView.backgroundImageView.image = UIImage(named: "fall01")
+    //print("currentWeather?.main.temp ",)
+    
+  }
+  
+  
   func configureViews() {
     // 버튼 누를 때마다 이미지 변경
     rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
@@ -66,11 +83,12 @@ final class WeatherViewController: UIViewController {
   var count = 0
   @objc private func updateWeather(_ sender: UIButton) {
     geocodeAddressString(city: cityName)
+
     
-    let imageName = ["sunny", "lightning", "cloudy", "rainy"]
+    let imageName = ["winter01", "summer04", "spring03", "summer01"]
     count += 1
     rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
-    
+                    
     let spinAnimation = CABasicAnimation(keyPath: "transform.rotation")
     spinAnimation.duration = 0.5
     spinAnimation.toValue = CGFloat.pi * 2
@@ -97,7 +115,7 @@ final class WeatherViewController: UIViewController {
     fetchForecast(lat: latitude, lon: longitude)
   }
   
-  private func fetchCurrentWeather(lat: Double, lon: Double) {
+  func fetchCurrentWeather(lat: Double, lon: Double ) {
     let endpoint = Endpoint(
       path: .weather,
       query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .lang: "kr"]
@@ -107,7 +125,56 @@ final class WeatherViewController: UIViewController {
     forecastService.fetchWeatherForecast(endpoint: endpoint) {
       [weak self] (result: Result<Weather, ServiceError>) in
       switch result {
-      case .success(let value): self?.currentWeather = value //뷰컨이 끝날때까지 self?.currentWeather붙잡고 있기 때문에, weak self로 해제 시켜줌.
+      case .success(let value): self?.currentWeather = value//뷰컨이 끝날때까지 self?.currentWeather붙잡고 있기 때문에, weak self로 해제 시켜줌.
+        var crrunt = value.main.temp
+        self?.crruntPath = crrunt
+        
+        let data = PutOn(curr: crrunt, category: [Category]())
+        
+        print("data", data)
+        
+        
+        switch value.main.temp {
+        case ...4.9 : //겨울1
+          self?.rootView.backgroundImageView.image = UIImage(named: "winter06")
+          print("겨울1")
+        case 5.0...8.9: //겨울2
+          self?.rootView.backgroundImageView.image = UIImage(named: "winter05")
+          print("겨울2")
+        case 9.0...11.9: //가을1
+          self?.rootView.backgroundImageView.image = UIImage(named: "fall01")
+         print("가을1")
+        case 12.0...16.9: //가을2
+          self?.rootView.backgroundImageView.image = UIImage(named: "fall05")
+         print("가을2")
+        case 17.0...19.9:
+          self?.rootView.backgroundImageView.image = UIImage(named: "spring06")
+         print("봄1")
+        case 20.0...22.9:
+          self?.rootView.backgroundImageView.image = UIImage(named: "spring03")
+          print("봄2")
+        case 23.0...27.9:
+          self?.rootView.backgroundImageView.image = UIImage(named: "summer02")
+          print("여름1")
+        case 28...:
+          self?.rootView.backgroundImageView.image = UIImage(named: "summer01")
+          print("여름2")
+        default:
+          print("해당사항없음")
+        }
+      //  if value.main.temp > 15 {
+        //  self.PutOnManager.nextImage()
+      //    print("value:", value.main.temp)
+        //  self?.rootView.backgroundImageView.image = UIImage(named: (self?.putMneg.springImage())!)
+      
+          
+          /*
+           let imageName = ["winter01", "winter04", "winter05", "winter06"]
+           count += 1
+           rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
+           */
+           
+        print("currentWeather : ", self?.currentWeather ?? "")
       case .failure(let error): print("현재 날씨 가져오기 실패. \(error)")
       }
     }

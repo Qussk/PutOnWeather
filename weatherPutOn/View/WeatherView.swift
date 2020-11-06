@@ -9,6 +9,7 @@ import UIKit
 
 final class WeatherView: UIView {
   
+  //var forecastService = ForecastService()
   private enum Layout {
     static let xMargin: CGFloat = 20
     static let topInfoViewHeight: CGFloat = 45
@@ -19,10 +20,11 @@ final class WeatherView: UIView {
   
   // MARK: Subviews
   
-  private let backgroundImageView = UIImageView(frame: .screenBounds).then {
-    $0.image = UIImage(named: "sunny")
+let backgroundImageView = UIImageView(frame: .screenBounds).then {
+//    $0.image = UIImage(named: "fall01")
     $0.contentMode = .scaleAspectFill
   }
+  
   //블러
   private let blurView = UIVisualEffectView(frame: .screenBounds).then {
     $0.effect = UIBlurEffect(style: .dark)

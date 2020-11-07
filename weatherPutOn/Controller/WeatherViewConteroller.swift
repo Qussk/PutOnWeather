@@ -11,7 +11,6 @@ import UIKit
 final class WeatherViewController: UIViewController {
   
   var crruntPath :Double?
-  var data = Data?.self
   
   private let rootView = WeatherView()
   let putMneg : PutOnManager = PutOnManager()
@@ -54,18 +53,14 @@ final class WeatherViewController: UIViewController {
  
     
   }
+  //현재날씨(초겨울)테마 먼저 보여주기
   func currentWeatherBackgroundImageChange(whit: Double){
-    
     rootView.backgroundImageView.image = UIImage(named: "fall01")
-
-   // rootView.backgroundImageView.image = UIImage(named: "fall01")
-    //print("currentWeather?.main.temp ",)
     
   }
   
   
   func configureViews() {
-    // 버튼 누를 때마다 이미지 변경
     rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
  
     rootView.tableView.register(CurrentWeatherCell.self, forCellReuseIdentifier: CurrentWeatherCell.identifier)
@@ -84,6 +79,7 @@ final class WeatherViewController: UIViewController {
   @objc private func updateWeather(_ sender: UIButton) {
     geocodeAddressString(city: cityName)
 
+    
     
     let imageName = ["winter01", "summer04", "spring03", "summer01"]
     count += 1
@@ -129,9 +125,9 @@ final class WeatherViewController: UIViewController {
         var crrunt = value.main.temp
         self?.crruntPath = crrunt
         
-        let data = PutOn(curr: crrunt, category: [Category]())
+    //    let data = Category(spring: self?.putMneg.springImage(), summer: self?.putMneg.summerImage(), fall: self?.putMneg.fallImage(), winter: self?.putMneg.winterImage())
         
-        print("data", data)
+    //    print("data", data)
         
         
         switch value.main.temp {

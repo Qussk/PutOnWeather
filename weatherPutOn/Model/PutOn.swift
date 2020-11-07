@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct PutOn {
-  let curr : Double?
-  let category : [Category]
-}
 
 struct Category {
   let spring : String

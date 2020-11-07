@@ -30,6 +30,7 @@ final class ForecastService: ForecastServiceable {
       do {
         let weather = try JSONDecoder().decode(T.self, from: data)
         self?.dispatchGroup.notify(queue: .main) {//(+),(-)되는 순간 노티파이됨.
+          
           completionHandler(.success(weather))
         }
       }

@@ -61,7 +61,7 @@ final class WeatherViewController: UIViewController {
   
   
   func configureViews() {
-    rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
+  //  rootView.reloadButton.addTarget(self, action: #selector(updateWeather(_:)), for: .touchUpInside)
  
     rootView.tableView.register(CurrentWeatherCell.self, forCellReuseIdentifier: CurrentWeatherCell.identifier)
     rootView.tableView.register(ForecastCell.self, forCellReuseIdentifier: ForecastCell.identifier)
@@ -73,14 +73,13 @@ final class WeatherViewController: UIViewController {
   override var prefersStatusBarHidden: Bool { true }
   
   
+  /*
   // MARK: Action
   //updateWeather 리로드버튼 눌렀을 때 작업
   var count = 0
   @objc private func updateWeather(_ sender: UIButton) {
     geocodeAddressString(city: cityName)
 
-    
-    
     let imageName = ["winter01", "summer04", "spring03", "summer01"]
     count += 1
     rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
@@ -90,7 +89,7 @@ final class WeatherViewController: UIViewController {
     spinAnimation.toValue = CGFloat.pi * 2
     sender.layer.add(spinAnimation, forKey: "spinAnimation")
   }
-  
+  */
   
   private func geocodeAddressString(city: String) {
     let geocoder = CLGeocoder()

@@ -41,13 +41,14 @@ let backgroundImageView = UIImageView(frame: .screenBounds).then {
     $0.textAlignment = .center
     $0.font = .systemFont(ofSize: 12, weight: .black)
   }
-  
+  /*
   let reloadButton = UIButton(type: .system).then {
     $0.setTitle("↻", for: .normal)
     $0.setTitleColor(.white, for: .normal)
     $0.titleLabel?.font = .preferredFont(forTextStyle: .title1)
     $0.alpha = 0
   }
+ */
   
   let tableView = UITableView().then {
     $0.rowHeight = Layout.currentWeatherCellHeight
@@ -64,7 +65,7 @@ let backgroundImageView = UIImageView(frame: .screenBounds).then {
   init() {
     super.init(frame: .screenBounds)
     self.addSubviews(backgroundImageView, blurView, topInfoView, tableView)//순서주의
-    topInfoView.addSubviews(locationLabel, timeLabel, reloadButton)
+    topInfoView.addSubviews(locationLabel, timeLabel)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -85,11 +86,13 @@ let backgroundImageView = UIImageView(frame: .screenBounds).then {
       0, locationLabel.maxY - 2,
       topInfoView.width, Layout.topInfoViewHeight - Layout.locationLabelHeight
     )
+    /*
     reloadButton.frame = .init(
       topInfoView.width - Layout.reloadbuttonSize, 0,
       Layout.reloadbuttonSize, Layout.reloadbuttonSize
     )
     reloadButton.center.y = (Layout.topInfoViewHeight / 2) + safeAreaInsets.top
+    */
     
     tableView.frame = .init(0, topInfoView.maxY, width, height - topInfoView.maxY)
     let topInset = tableView.height
@@ -127,11 +130,11 @@ extension WeatherView {
     
     locationLabel.alpha = 0
     timeLabel.alpha = 0
-    reloadButton.alpha = 0
+  //  reloadButton.alpha = 0
     UIView.animate(withDuration: 0.4) {
       self.locationLabel.alpha = 1
       self.timeLabel.alpha = 1
-      self.reloadButton.alpha = 1
+   //   self.reloadButton.alpha = 1
     }
   }
 }

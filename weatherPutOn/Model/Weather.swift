@@ -8,12 +8,12 @@
 import Foundation
 
 struct Weather {
-  let main: Main
+  var main: Main
   let sky: [Sky]
   let date: Date
   
   struct Main: Decodable {
-    let temp: Double
+    var temp: Double
     let temp_min: Double
     let temp_max: Double
   }

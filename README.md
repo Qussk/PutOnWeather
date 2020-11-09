@@ -5,7 +5,7 @@
 
 
 
-## 어떤 앱인가요 ?
+## '날씨옷' 어떤 앱인가요 ?
 <div>
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/sub.gif?raw=true" width="200px">
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w1.png?raw=true" width="200px">

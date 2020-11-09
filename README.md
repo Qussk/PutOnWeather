@@ -11,6 +11,7 @@
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/sub.gif?raw=true" width="200px">
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w1.png?raw=true" width="200px">
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w2.png?raw=true" width="200px">
+<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w4.png?raw=true" width="200px">
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w3.png?raw=true" width="200px">
 </div>
 

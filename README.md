@@ -7,11 +7,12 @@
 
 
 ## 어떤 앱인가요 ?
-
+<div>
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/sub.gif?raw=true" width="200px">
 <img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w1.png?raw=true" width="200px">
-<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w2.gif?raw=true" width="200px">
-
+<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w2.png?raw=true" width="200px">
+<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/w3.png?raw=true" width="200px">
+</div>
 
 > 현재 날씨와 기온, 기상예보를 안내하고, 기온에 맞는 wear image를 소개합니다.
 

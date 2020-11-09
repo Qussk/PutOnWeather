@@ -2,7 +2,7 @@
  weather put on
 
 
-
+![](image/logo.1.png)
 <img src = "image/logo.1.png" width="300px">
 
 
@@ -38,7 +38,7 @@
 
 ### API
 
-![](https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox/FMfcgxwJXCCfBZSqssxcgjLqKFXfKwxF?projector=12)
+![](https://upload.wikimedia.org/wikipedia/commons/f/f6/OpenWeather-Logo.jpg)
 
 - [https://home.openweathermap.org 이용](https://home.openweathermap.org) 
 

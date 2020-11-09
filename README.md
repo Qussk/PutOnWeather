@@ -2,14 +2,13 @@
  weather put on
 
 
-![](image/logo.1.png)
-<img src = "image/logo.1.png" width="300px">
+<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/logo1.png?raw=true" width="300px">
 
 
 
 ## 어떤 앱인가요 ?
 
-<img src = "image/logo.2.png" width="200px">
+<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/logo2.png?raw=true" width="200px">
 
 
 > 현재 날씨와 기온, 기상예보를 안내하고, 기온에 맞는 wear image를 소개합니다.

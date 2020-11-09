@@ -1,7 +1,7 @@
 # Put On Weather
 
 
-<img src = "https://github.com/Qussk/PutOnWeather/blob/develop/image/icon.png?raw=true" width="150px">
+<img src = "https://github.com/Qussk/PutOnWeather/blob/main/image/icon.png?raw=true" width="150px">
 
 
 

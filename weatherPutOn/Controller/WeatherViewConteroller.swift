@@ -50,14 +50,36 @@ final class WeatherViewController: UIViewController {
     configureViews()
     currentWeatherBackgroundImageChange(whit: 0.0)
     geocodeAddressString(city: cityName)
- 
-    
+    swipeRecognizer()
+    navigationController?.navigationBar.isHidden = true
+   // navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+
   }
   //현재날씨(초겨울)테마 먼저 보여주기
   func currentWeatherBackgroundImageChange(whit: Double){
     rootView.backgroundImageView.image = UIImage(named: "fall01")
-    
   }
+  
+  func swipeRecognizer() {
+          let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture(_:)))
+          swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+          self.view.addGestureRecognizer(swipeRight)
+          
+      }
+      
+      @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer){
+          if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            var vc = SecondeViewContoller()
+              switch swipeGesture.direction{
+              case UISwipeGestureRecognizer.Direction.right:
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+                print("dddd")
+              default: break
+              }
+          }
+      }
   
   
   func configureViews() {
@@ -73,24 +95,23 @@ final class WeatherViewController: UIViewController {
   override var prefersStatusBarHidden: Bool { true }
   
   
-  /*
   // MARK: Action
   //updateWeather 리로드버튼 눌렀을 때 작업
   var count = 0
   @objc private func updateWeather(_ sender: UIButton) {
-    geocodeAddressString(city: cityName)
+      
+      geocodeAddressString(city: cityName)
+    
+      let imageName = ["winter01", "summer04", "spring03", "summer01"]
+      count += 1
+      rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
+                      
+      let spinAnimation = CABasicAnimation(keyPath: "transform.rotation")
+      spinAnimation.duration = 0.5
+      spinAnimation.toValue = CGFloat.pi * 2
+      sender.layer.add(spinAnimation, forKey: "spinAnimation")
+   }
 
-    let imageName = ["winter01", "summer04", "spring03", "summer01"]
-    count += 1
-    rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
-                    
-    let spinAnimation = CABasicAnimation(keyPath: "transform.rotation")
-    spinAnimation.duration = 0.5
-    spinAnimation.toValue = CGFloat.pi * 2
-    sender.layer.add(spinAnimation, forKey: "spinAnimation")
-  }
-  */
-  
   private func geocodeAddressString(city: String) {
     let geocoder = CLGeocoder()
     geocoder.geocodeAddressString(city) { (placemarks, error) in
@@ -110,24 +131,17 @@ final class WeatherViewController: UIViewController {
     fetchForecast(lat: latitude, lon: longitude)
   }
   
-  func fetchCurrentWeather(lat: Double, lon: Double ) {
-    let endpoint = Endpoint(
-      path: .weather,
-      query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .lang: "kr"]
-    )
-    
+
+  
+  func fetchCurrentWeather(lat: Double, lon: Double){
+    let endpoint = Endpoint(path: .weather, query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .lang: "kr"])
+ 
     //[weak self]클로저가 레퍼런스 카운트 올리기를 방지
-    forecastService.fetchWeatherForecast(endpoint: endpoint) {
-      [weak self] (result: Result<Weather, ServiceError>) in
+    forecastService.fetchWeatherForecast(endpoint: endpoint) { [weak self] (result: Result<Weather, ServiceError>) in
       switch result {
-      case .success(let value): self?.currentWeather = value//뷰컨이 끝날때까지 self?.currentWeather붙잡고 있기 때문에, weak self로 해제 시켜줌.
+      case .success(let value): self?.currentWeather = value//뷰컨이 끝날때까지 self?.currentWeather붙잡고 있기 때문에, [weak self]로 해제 시켜줌.
         var crrunt = value.main.temp
         self?.crruntPath = crrunt
-        
-    //    let data = Category(spring: self?.putMneg.springImage(), summer: self?.putMneg.summerImage(), fall: self?.putMneg.fallImage(), winter: self?.putMneg.winterImage())
-        
-    //    print("data", data)
-        
         
         switch value.main.temp {
         case ...4.9 : //겨울1
@@ -157,17 +171,6 @@ final class WeatherViewController: UIViewController {
         default:
           print("해당사항없음")
         }
-      //  if value.main.temp > 15 {
-        //  self.PutOnManager.nextImage()
-      //    print("value:", value.main.temp)
-        //  self?.rootView.backgroundImageView.image = UIImage(named: (self?.putMneg.springImage())!)
-      
-          
-          /*
-           let imageName = ["winter01", "winter04", "winter05", "winter06"]
-           count += 1
-           rootView.updateBackgroundImage(imageName: imageName[count % imageName.count])
-           */
            
         print("currentWeather : ", self?.currentWeather ?? "")
       case .failure(let error): print("현재 날씨 가져오기 실패. \(error)")

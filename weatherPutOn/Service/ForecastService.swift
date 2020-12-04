@@ -12,24 +12,26 @@ final class ForecastService: ForecastServiceable {
   
   //1-1.dispatchGroup: 무조건 현재날씨가 먼저 온후,기상예보 가져오기.
   private let dispatchGroup = DispatchGroup()
- // private let
-  func fetchWeatherForecast<T>(
-    endpoint: Endpoint,
-    completionHandler: @escaping (Result<T, ServiceError>) -> Void
+
+  func fetchWeatherForecast<T>(endpoint: Endpoint, completionHandler: @escaping (Result<T, ServiceError>) -> Void
   ) where T: Decodable {
     guard let url = endpoint.combineURL() else { return completionHandler(.failure(.invalidURL)) }
     
-    dispatchGroup.enter() //1-2. (+)completionHandler를 노티파이 하도록
+    
+    //1-2. (+)completionHandler를 노티파이 하도록
+    dispatchGroup.enter()
+    
     URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
       defer { self?.dispatchGroup.leave() }//(-)
       guard error == nil else { return completionHandler(.failure(.clientError(error!))) }
       guard let header = response as? HTTPURLResponse,
-        (200..<300) ~= header.statusCode
-        else { return completionHandler(.failure(.invalidStatusCode)) }
+            (200..<300) ~= header.statusCode else { return completionHandler(.failure(.invalidStatusCode)) }
+      
       guard let data = data else { return completionHandler(.failure(.noData)) }
       do {
         let weather = try JSONDecoder().decode(T.self, from: data)
-        self?.dispatchGroup.notify(queue: .main) {//(+),(-)되는 순간 노티파이됨.
+        self?.dispatchGroup.notify(queue: .main) {
+          //(+),(-)되는 순간 노티파이됨.
           
           completionHandler(.success(weather))
         }

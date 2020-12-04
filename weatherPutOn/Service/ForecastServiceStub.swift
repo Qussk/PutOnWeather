@@ -22,8 +22,10 @@ final class ForecastServiceStub: ForecastServiceable {
     switch endpoint.path {
     case .weather :
       data = SampleData.currentWeather
+   // break
     case .forecast :
       data = SampleData.forecast
+    //  break
     }
     
     do {

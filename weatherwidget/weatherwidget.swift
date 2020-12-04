@@ -38,6 +38,7 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+
 }
 
 struct weatherwidgetEntryView : View {
@@ -51,6 +52,7 @@ struct weatherwidgetEntryView : View {
       case .systemSmall :
         Text(entry.date, style: .time).foregroundColor(.white)
             .fontWeight(.light)
+          //  .kerning(3)
           .padding(.leading, 10)
           .padding(.trailing, 10)
           .padding(.top, 40)
@@ -65,6 +67,7 @@ struct weatherwidgetEntryView : View {
       case .systemMedium:
         Text(entry.date, style: .time).foregroundColor(.white)
             .fontWeight(.light)
+         // .kerning(3)
           .padding(.leading, 110)
           .padding(.trailing, 8)
           .padding(.top, 30)
@@ -79,6 +82,7 @@ struct weatherwidgetEntryView : View {
       case .systemLarge:
       Text(entry.date, style: .time).foregroundColor(.white)
           .fontWeight(.light)
+       // .kerning(0)
         .padding(.leading, 120)
         .padding(.trailing, 30)
         .padding(.top, 200)

@@ -12,7 +12,8 @@ import Foundation
 //요청하는 도착지점을 Endpoint로 정의함.
 struct Endpoint {
   static let defaultAppID = "f70d6c9f2bb7e54606403f82eaddf912"
-  
+  static let shared = ForecastService()//
+
   let baseURL = "https://api.openweathermap.org"
   let apiVersion = "/data/2.5/"
   let path: Path
@@ -28,13 +29,14 @@ struct Endpoint {
   func combineURL() -> URL? {
     guard var components = URLComponents(string: baseURL) else { fatalError() }
     components.path = apiVersion + path.rawValue //path넣기
-   // print("components.path : ",components.path)
     components.queryItems = query.map {
       URLQueryItem(name: $0.rawValue, value: $1)
+      // print("components.path : ",components.path)
+
     }
-   // print("components.queryItems : ",components.queryItems)
     components.queryItems?.append(.init(name: "appid", value: appID))
     print(components.url?.absoluteString ?? "")
+    // print("components.queryItems : ",components.queryItems)
     return components.url
   }
 }
@@ -49,6 +51,7 @@ extension Endpoint {
     case lat, lon, units, cnt, lang
   }
   typealias QueryItems = [QueryKey: String] //딕셔너리로 만듦
+
 }
 
 

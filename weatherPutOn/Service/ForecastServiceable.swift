@@ -11,8 +11,7 @@ import Foundation
 // 씬딜리게이트 루트뷰를 -> ForecastServiceStub
 
 protocol ForecastServiceable {
-  func fetchWeatherForecast<T>(
-    endpoint: Endpoint,
+  func fetchWeatherForecast<T>(endpoint: Endpoint,
     completionHandler: @escaping (Result<T, ServiceError>) -> Void
   ) where T: Decodable
 }

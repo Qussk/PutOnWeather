@@ -66,20 +66,7 @@ final class WeatherViewController: UIViewController {
           self.view.addGestureRecognizer(swipeRight)
           
       }
-      
-      @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer){
-          if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            var vc = SecondeViewContoller()
-              switch swipeGesture.direction{
-              case UISwipeGestureRecognizer.Direction.right:
-                vc.modalTransitionStyle = .crossDissolve
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-                print("dddd")
-              default: break
-              }
-          }
-      }
+  
   
   
   func configureViews() {
@@ -111,7 +98,22 @@ final class WeatherViewController: UIViewController {
       spinAnimation.toValue = CGFloat.pi * 2
       sender.layer.add(spinAnimation, forKey: "spinAnimation")
    }
+  
+  //스와이프
+  @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer){
+      if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+        var vc = SecondeViewContoller()
+          switch swipeGesture.direction{
+          case UISwipeGestureRecognizer.Direction.right:
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+          default: break
+          }
+      }
+  }
 
+  
   private func geocodeAddressString(city: String) {
     let geocoder = CLGeocoder()
     geocoder.geocodeAddressString(city) { (placemarks, error) in
@@ -132,7 +134,6 @@ final class WeatherViewController: UIViewController {
   }
   
 
-  
   func fetchCurrentWeather(lat: Double, lon: Double){
     let endpoint = Endpoint(path: .weather, query: [.lat: "\(lat)", .lon: "\(lon)", .units: "metric", .lang: "kr"])
  

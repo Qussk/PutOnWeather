@@ -55,7 +55,7 @@ extension Weather : CustomStringConvertible {
     //main이랑 description부분만 출력하고 온도만 따로
     description += " 🌡 \(main.temp)º"
     return "\n" + description
-    //예시 [02.02 02시] ☀️ clouds(튼 구름),🌡 22.95º
+    //print: [02.02 02시] ☀️ clouds(튼 구름),🌡 22.95º
   }
 }
 
